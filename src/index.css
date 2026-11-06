@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-primary: #0F0E0D;
+  --color-bg-secondary: #161513;
+  --color-gold: #C5A059;
+  --color-cream: #F9F6F0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0F0E0D;
+  color: #F9F6F0;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F9F6F0 0%, #E6CCA0 30%, #C5A059 70%, #F5E5C9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(22, 21, 19, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(197, 160, 89, 0.18);
+}
+
+.glass-panel-elevated {
+  background: rgba(27, 25, 23, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.glass-nav {
+  background: rgba(15, 14, 13, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+/* Gold button hover effect */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A059 50%, #B38F46 100%);
+  color: #0F0E0D;
+  transition: all 0.3s ease;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transition: all 0.6s ease;
+}
+
+.btn-gold:hover::after {
+  left: 100%;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 0 25px rgba(197, 160, 89, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Luxury card micro-interactions */
+.luxury-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.luxury-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(197, 160, 89, 0.4);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(197, 160, 89, 0.12);
+}
+
+/* Ambient glow */
+.ambient-glow-top {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, rgba(15, 14, 13, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ken Burns subtle background pan & zoom */
+@keyframes kenburns {
+  0% { transform: scale(1.03); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.03); }
+}
+
+.animate-kenburns {
+  animation: kenburns 24s ease-in-out infinite alternate;
+}
+
+/* Float animation for luxury accents */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes shine {
+  from {
+    left: -50%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    left: 140%;
+    opacity: 0;
+  }
+}
+
+.group:hover .animate-shine,
+.group:focus-within .animate-shine {
+  animation: shine 1s ease-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-insta-marquee {
+  animation: insta-marquee 38s linear infinite;
+}
+
+@keyframes insta-marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-insta-marquee:hover,
+.animate-insta-marquee:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns,
+  .animate-float,
+  .animate-insta-marquee,
+  .group:hover .animate-shine,
+  .group:focus-within .animate-shine {
+    animation: none;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #0F0E0D;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2724;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
