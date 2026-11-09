@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Check, Clock, Search, Sparkles, X } from 'lucide-react';
 
 const categories = [
@@ -100,6 +100,31 @@ const services = [
 export default function Step2Specialties({ onOpenBooking }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const filteredServices = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -117,24 +142,27 @@ export default function Step2Specialties({ onOpenBooking }) {
   }, [activeCategory, searchQuery]);
 
   return (
-    <section id="specialties" className="relative isolate overflow-hidden bg-[#0F0E0D] py-24">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-48 top-24 h-[32rem] w-[32rem] rounded-full bg-[#a76d37]/10 blur-[120px]" />
-        <div className="absolute -right-40 top-[28rem] h-[30rem] w-[30rem] rounded-full bg-[#7c4660]/10 blur-[130px]" />
-        <div className="absolute left-1/3 bottom-[-14rem] h-[28rem] w-[36rem] rounded-full bg-[#587867]/[0.08] blur-[130px]" />
-      </div>
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mx-auto mb-12 max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-light leading-tight text-[#FDFBF7] sm:text-4xl md:text-5xl">
-            Browse Our <span className="font-normal italic text-[#FDFBF7]">Specialties & Pricing</span>
+    <section
+      id="specialties"
+      ref={sectionRef}
+      className={`specialties-section relative isolate overflow-hidden py-20 sm:py-24 ${isVisible ? 'is-visible' : ''}`}
+    >
+      <div className="specialties-atmosphere pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="specialties-content relative mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="specialties-heading mx-auto mb-10 max-w-3xl text-center">
+          <span className="mb-3 block text-[10px] font-semibold uppercase tracking-[0.3em] text-[#927650] sm:text-[11px]">
+            Thoughtfully tailored, beautifully finished
+          </span>
+          <h2 className="font-serif text-4xl font-light leading-tight tracking-[-0.025em] text-[#302a25] sm:text-5xl md:text-[3.6rem]">
+            Browse Our <span className="font-normal italic text-[#806b55]">Specialties & Pricing</span>
           </h2>
-          <p className="mt-4 font-sans text-xs font-light leading-relaxed text-gray-300 sm:text-sm">
+          <p className="mx-auto mt-5 max-w-2xl font-sans text-sm font-light leading-[1.8] text-[#716a61] sm:text-[15px]">
             Transparent pricing with zero hidden salon add-ons. Every service includes a thoughtful consultation and our signature finish.
           </p>
         </div>
 
-        <div className="mb-10 flex flex-col items-center gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
-          <div className="flex w-full flex-1 flex-wrap justify-center gap-2 lg:justify-start">
+        <div className="specialties-toolbar mb-9 flex flex-col gap-4 rounded-[1.4rem] p-3 sm:p-4 lg:flex-row lg:items-center lg:gap-5">
+          <div className="specialties-categories flex min-w-0 flex-1 gap-2 overflow-x-auto pb-1 lg:pb-0" role="group" aria-label="Filter services by category">
             {categories.map((category) => {
               const isActive = activeCategory === category.id;
               return (
@@ -143,10 +171,10 @@ export default function Step2Specialties({ onOpenBooking }) {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`rounded-full border px-4 py-2.5 text-xs font-medium transition-all duration-200 sm:px-5 ${
+                  className={`specialties-filter whitespace-nowrap rounded-full border px-4 py-2.5 text-[11px] font-medium transition-all duration-300 sm:px-4 lg:px-3 xl:px-4 ${
                     isActive
-                      ? 'border-[#C5A059] bg-[#C5A059] text-[#17130d] shadow-[0_0_20px_rgba(197,160,89,0.28)]'
-                      : 'border-[#C5A059]/25 bg-white/[0.04] text-zinc-200 backdrop-blur-md hover:border-[#C5A059]/70 hover:bg-[#C5A059]/10 hover:text-white'
+                      ? 'is-active'
+                      : ''
                   }`}
                 >
                   {category.label}
@@ -155,10 +183,10 @@ export default function Step2Specialties({ onOpenBooking }) {
             })}
           </div>
 
-          <div className="w-full max-w-md flex-shrink-0 lg:w-[340px]">
+          <div className="specialties-search w-full flex-shrink-0 lg:w-[290px] xl:w-[320px]">
             <label htmlFor="cabello-specialty-search" className="sr-only">Search services and treatments</label>
-            <div className="flex min-w-0 items-center gap-3 rounded-full border border-[#C5A059]/35 bg-[#161513]/90 px-4 py-1 shadow-[0_0_30px_rgba(197,160,89,0.07)] transition-all hover:border-[#C5A059]/55 focus-within:border-[#D8B46C] focus-within:ring-2 focus-within:ring-[#C5A059]/20 focus-within:shadow-[0_0_24px_rgba(197,160,89,0.12)]">
-              <Search aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-[#C5A059]" />
+            <div className="flex min-w-0 items-center gap-3 rounded-full border px-4">
+              <Search aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-[#947b59]" />
               <input
                 id="cabello-specialty-search"
                 type="text"
@@ -166,14 +194,14 @@ export default function Step2Specialties({ onOpenBooking }) {
                 placeholder="Search service or treatment..."
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                className="min-w-0 flex-1 border-0 bg-transparent py-3.5 text-sm text-[#F9F6F0] outline-none placeholder:text-zinc-500 focus:ring-0"
+                className="min-w-0 flex-1 border-0 bg-transparent py-3.5 text-sm text-[#37312b] outline-none placeholder:text-[#9b9388] focus:ring-0"
               />
               {searchQuery && (
                 <button
                   type="button"
                   aria-label="Clear search"
                   onClick={() => setSearchQuery('')}
-                  className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+                  className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-[#82796f] transition-colors hover:bg-[#e9e0d4] hover:text-[#352f29]"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -183,46 +211,50 @@ export default function Step2Specialties({ onOpenBooking }) {
         </div>
 
         {filteredServices.length > 0 ? (
-          <div className="grid grid-cols-1 gap-8 auto-rows-fr items-stretch md:grid-cols-2 lg:grid-cols-3">
+          <div
+            key={`${activeCategory}-${searchQuery.trim().toLowerCase()}`}
+            className="specialties-grid grid grid-cols-1 auto-rows-fr items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
+            data-count={filteredServices.length}
+          >
             {filteredServices.map((service) => (
               <article
                 key={service.id}
-                className="group flex h-full min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-[#C5A059]/30 bg-[#181614] shadow-[0_16px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[0.98] hover:border-[#C5A059]/55 hover:shadow-[0_20px_40px_rgba(197,160,89,0.2)]"
+                className="specialties-card group flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem]"
               >
-                <div className="relative h-52 w-full flex-shrink-0 overflow-hidden">
+                <div className="specialties-card-image relative h-56 w-full flex-shrink-0 overflow-hidden sm:h-60">
                   <img
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
-                    className="h-52 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/75 via-transparent to-black/10" />
-                  <span className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] shadow-sm ${service.tagStyle}`}>
+                  <div className="specialties-image-shade absolute inset-0" />
+                  <span className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.1em] shadow-sm ${service.tagStyle}`}>
                     {service.tag}
                   </span>
-                  <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#161513]/80 px-3 py-1.5 text-xs text-white backdrop-blur-md">
-                    <Clock className="h-3.5 w-3.5 text-[#D8B46C]" />
+                  <span className="specialties-duration absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs">
+                    <Clock className="h-3.5 w-3.5 text-[#f3e7d4]" />
                     {service.duration}
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-6">
-                  <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                    <h3 className="min-w-0 flex-1 font-serif text-2xl font-medium leading-tight text-[#FDFBF7] sm:text-[1.7rem]">
+                <div className="specialties-card-body flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="mb-3 flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                    <h3 className="min-w-0 flex-1 font-serif text-[1.65rem] font-medium leading-[1.08] text-[#332d27] sm:text-[1.8rem]">
                       {service.title}
                     </h3>
-                    <span className="whitespace-nowrap font-serif text-xl font-semibold text-[#D8B46C]">
+                    <span className="whitespace-nowrap pt-1 font-serif text-lg font-semibold text-[#806b4e] sm:text-xl">
                       {service.price}
                     </span>
                   </div>
-                  <p className="mb-5 text-sm font-light leading-relaxed text-gray-300">
+                  <p className="mb-5 min-h-[3.25rem] text-[13px] font-light leading-[1.7] text-[#756d63] sm:text-sm">
                     {service.desc}
                   </p>
 
-                  <ul className="mb-6 space-y-2.5">
+                  <ul className="mb-6 space-y-2.5 border-t border-[#78664f]/15 pt-5">
                     {service.included.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-xs leading-relaxed text-zinc-300">
-                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#C5A059]" strokeWidth={2.5} />
+                      <li key={feature} className="flex items-start gap-2.5 text-xs leading-relaxed text-[#625b52]">
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#9a805c]" strokeWidth={2} />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -231,7 +263,7 @@ export default function Step2Specialties({ onOpenBooking }) {
                   <button
                     type="button"
                     onClick={() => onOpenBooking(service.id)}
-                    className="mt-auto flex w-full items-center justify-center gap-2 rounded-full border border-[#C5A059]/55 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#D8B46C] transition-all duration-200 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#17130d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]"
+                    className="specialties-book-button mt-auto flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.15em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8f7757] sm:text-[11px]"
                   >
                     <span>Book This Service</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -241,17 +273,17 @@ export default function Step2Specialties({ onOpenBooking }) {
             ))}
           </div>
         ) : (
-          <div className="mx-auto flex max-w-xl flex-col items-center rounded-2xl border border-[#C5A059]/20 bg-[#161513] px-6 py-12 text-center">
-            <Sparkles className="mb-4 h-7 w-7 text-[#C5A059]" />
-            <h3 className="font-serif text-2xl text-[#FDFBF7]">No matching services</h3>
-            <p className="mt-2 text-sm text-gray-300">Try another search or browse all specialties.</p>
+          <div className="specialties-empty mx-auto flex max-w-xl flex-col items-center rounded-2xl px-6 py-12 text-center">
+            <Sparkles className="mb-4 h-7 w-7 text-[#947b59]" />
+            <h3 className="font-serif text-2xl text-[#332d27]">No matching services</h3>
+            <p className="mt-2 text-sm text-[#716a61]">Try another search or browse all specialties.</p>
             <button
               type="button"
               onClick={() => {
                 setActiveCategory('all');
                 setSearchQuery('');
               }}
-              className="mt-5 rounded-full border border-[#C5A059]/50 px-5 py-2 text-xs font-semibold uppercase tracking-wider text-[#D8B46C] transition-colors hover:bg-[#C5A059] hover:text-[#17130d]"
+              className="specialties-empty-button mt-5 rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all"
             >
               Show All Services
             </button>
