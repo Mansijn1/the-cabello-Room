@@ -220,16 +220,16 @@ html {
 .headspa-section {
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 23% 48%, rgba(108, 104, 67, 0.16) 0%, rgba(108, 104, 67, 0) 38%),
-    radial-gradient(ellipse at 82% 55%, rgba(112, 82, 55, 0.12) 0%, rgba(112, 82, 55, 0) 42%),
-    linear-gradient(118deg, #211d18 0%, #191916 48%, #131311 100%);
+    radial-gradient(ellipse at 23% 48%, rgba(216, 180, 108, 0.12) 0%, rgba(216, 180, 108, 0) 38%),
+    radial-gradient(ellipse at 82% 55%, rgba(112, 82, 55, 0.08) 0%, rgba(112, 82, 55, 0) 42%),
+    linear-gradient(118deg, #faf6f0 0%, #f5efeb 48%, #f1e9e1 100%);
 }
 
 .headspa-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(11, 10, 9, 0.08), transparent 48%, rgba(11, 10, 9, 0.14));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent 48%, rgba(194, 164, 129, 0.06));
   pointer-events: none;
   z-index: 0;
 }
@@ -286,15 +286,15 @@ html {
 }
 
 .headspa-image-caption {
-  background: rgba(25, 23, 19, 0.82);
-  border: 1px solid rgba(220, 199, 157, 0.2);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 253, 249, 0.92);
+  border: 1px solid rgba(154, 125, 81, 0.24);
+  box-shadow: 0 12px 32px rgba(68, 51, 34, 0.12);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 
 .headspa-step {
-  border-bottom: 1px solid rgba(220, 199, 157, 0.13);
+  border-bottom: 1px solid rgba(112, 91, 67, 0.16);
   transition: border-color 350ms ease, padding-left 350ms ease;
 }
 
@@ -303,19 +303,19 @@ html {
 }
 
 .headspa-step:hover {
-  border-color: rgba(220, 199, 157, 0.3);
+  border-color: rgba(112, 91, 67, 0.34);
   padding-left: 5px;
 }
 
 .headspa-step-number {
-  border: 1px solid rgba(216, 180, 108, 0.42);
-  background: rgba(216, 180, 108, 0.045);
+  border: 1px solid rgba(154, 125, 81, 0.45);
+  background: rgba(154, 125, 81, 0.08);
   transition: background-color 350ms ease, border-color 350ms ease;
 }
 
 .headspa-step:hover .headspa-step-number {
-  border-color: rgba(216, 180, 108, 0.68);
-  background: rgba(216, 180, 108, 0.12);
+  border-color: rgba(154, 125, 81, 0.72);
+  background: rgba(154, 125, 81, 0.14);
 }
 
 .headspa-cta {
@@ -334,7 +334,7 @@ html {
 }
 
 .headspa-cta:focus-visible {
-  outline: 2px solid #f1dfb8;
+  outline: 2px solid #8f7757;
   outline-offset: 4px;
 }
 
@@ -436,24 +436,11 @@ html {
 }
 
 .specialties-card {
-  --card-surface: #fffdf9;
-  border: 1px solid rgba(111, 91, 66, 0.16);
-  background: linear-gradient(150deg, var(--card-surface), #faf6ef 100%);
+  border: 1px solid rgba(253, 230, 138, 0.8);
+  background: #FAF8F5;
   box-shadow: 0 14px 34px rgba(76, 57, 37, 0.09), 0 2px 6px rgba(76, 57, 37, 0.04);
   animation: specialties-card-in 550ms both;
   transition: transform 450ms cubic-bezier(0.2, 0.65, 0.3, 1), border-color 350ms ease, box-shadow 450ms ease;
-}
-
-.specialties-card:nth-child(4n + 2) {
-  --card-surface: #fffaf7;
-}
-
-.specialties-card:nth-child(4n + 3) {
-  --card-surface: #fbfaf5;
-}
-
-.specialties-card:nth-child(4n + 4) {
-  --card-surface: #faf9f6;
 }
 
 .specialties-card:nth-child(2) {

@@ -49,12 +49,12 @@ export default function HeadSpaSpotlight({ onOpenBooking }) {
 
               {/* Floating Insight Pill */}
               <div className="headspa-image-caption absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-xl flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#C5A059]/15 border border-[#D8B46C]/35 flex items-center justify-center text-[#D8B46C] flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#C5A059]/15 border border-[#D8B46C]/35 flex items-center justify-center text-[#806b4e] flex-shrink-0">
                   <Droplets className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-serif text-lg text-[#FDFBF7] font-normal leading-tight">Holistic Scalp & Follicle Renewal</div>
-                  <div className="text-[11px] text-[#D0C9BB] mt-1">Warm therapeutic water ring + cedarwood essential oils</div>
+                  <div className="font-serif text-lg text-[#332820] font-normal leading-tight">Holistic Scalp & Follicle Renewal</div>
+                  <div className="text-[11px] text-[#6f655a] mt-1">Warm therapeutic water ring + cedarwood essential oils</div>
                 </div>
               </div>
             </div>
@@ -62,39 +62,39 @@ export default function HeadSpaSpotlight({ onOpenBooking }) {
 
           {/* Right Content */}
           <div className="headspa-reveal headspa-copy lg:col-span-6">
-            <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#D8B46C] block mb-4">
+            <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#806b4e] block mb-4">
               Penrith's Signature Sanctuary
             </span>
-            <h2 className="font-serif text-[2.55rem] sm:text-5xl lg:text-[3.55rem] font-light text-[#FDFBF7] leading-[1.04] tracking-[-0.025em] mb-6">
-              The Japanese Head Spa <span className="italic font-normal gold-gradient-text">Ritual</span>
+            <h2 className="font-serif text-[2.55rem] sm:text-5xl lg:text-[3.55rem] font-light text-[#332820] leading-[1.04] tracking-[-0.025em] mb-6">
+              The Japanese Head Spa <span className="italic font-normal text-[#9b6c43]">Ritual</span>
             </h2>
             
-            <p className="font-sans text-sm sm:text-[15px] text-[#D4CFC5] font-light leading-[1.85] mb-7 max-w-xl">
+            <p className="font-sans text-sm sm:text-[15px] text-[#62584e] font-light leading-[1.85] mb-7 max-w-xl">
               Healthy hair begins with a revitalized scalp. Our custom head spa suite combines Japanese waterfall therapy with high-magnification trichological scalp analysis, removing buildup that normal washing cannot reach.
             </p>
 
             <div className="headspa-steps mb-8">
               <div className="headspa-step flex items-start gap-4 py-4 first:pt-0">
-                <span className="headspa-step-number w-8 h-8 rounded-full text-[#D8B46C] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">1</span>
+                <span className="headspa-step-number w-8 h-8 rounded-full text-[#806b4e] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">1</span>
                 <div className="pt-0.5">
-                  <h4 className="text-sm sm:text-[15px] font-medium text-[#F6F1E8] tracking-wide">Digital Micro-Camera Analysis</h4>
-                  <p className="text-[13px] text-[#BDB7AC] font-light leading-relaxed mt-1">We examine your follicular health and moisture balance before customizing organic scrubs.</p>
+                  <h4 className="text-sm sm:text-[15px] font-medium text-[#38302a] tracking-wide">Digital Micro-Camera Analysis</h4>
+                  <p className="text-[13px] text-[#756b61] font-light leading-relaxed mt-1">We examine your follicular health and moisture balance before customizing organic scrubs.</p>
                 </div>
               </div>
 
               <div className="headspa-step flex items-start gap-4 py-4">
-                <span className="headspa-step-number w-8 h-8 rounded-full text-[#D8B46C] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">2</span>
+                <span className="headspa-step-number w-8 h-8 rounded-full text-[#806b4e] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">2</span>
                 <div className="pt-0.5">
-                  <h4 className="text-sm sm:text-[15px] font-medium text-[#F6F1E8] tracking-wide">Warm Waterfall Halo Cascade</h4>
-                  <p className="text-[13px] text-[#BDB7AC] font-light leading-relaxed mt-1">Warm rhythmic rainfall stimulates micro-circulation while botanical steam opens hair cuticles.</p>
+                  <h4 className="text-sm sm:text-[15px] font-medium text-[#38302a] tracking-wide">Warm Waterfall Halo Cascade</h4>
+                  <p className="text-[13px] text-[#756b61] font-light leading-relaxed mt-1">Warm rhythmic rainfall stimulates micro-circulation while botanical steam opens hair cuticles.</p>
                 </div>
               </div>
 
               <div className="headspa-step flex items-start gap-4 py-4 last:pb-0">
-                <span className="headspa-step-number w-8 h-8 rounded-full text-[#D8B46C] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">3</span>
+                <span className="headspa-step-number w-8 h-8 rounded-full text-[#806b4e] text-xs flex items-center justify-center font-serif flex-shrink-0 mt-0.5">3</span>
                 <div className="pt-0.5">
-                  <h4 className="text-sm sm:text-[15px] font-medium text-[#F6F1E8] tracking-wide">Neck & Cervical Fascia Acupressure</h4>
-                  <p className="text-[13px] text-[#BDB7AC] font-light leading-relaxed mt-1">25-minute extended tension-melting massage that relieves headaches, neck tightness, and stress.</p>
+                  <h4 className="text-sm sm:text-[15px] font-medium text-[#38302a] tracking-wide">Neck & Cervical Fascia Acupressure</h4>
+                  <p className="text-[13px] text-[#756b61] font-light leading-relaxed mt-1">25-minute extended tension-melting massage that relieves headaches, neck tightness, and stress.</p>
                 </div>
               </div>
             </div>

@@ -6,25 +6,25 @@ const highlights = [
     title: 'Prosecco & Grazing',
     detail: 'A little sparkle and something delicious.',
     icon: Wine,
-    style: 'border-[#ead9c5] bg-[#FDF6EE] text-[#90643f]',
+    style: 'text-[#90643f]',
   },
   {
     title: 'Live Tool Coaching',
     detail: 'Learn curls and waves, hands-on.',
     icon: Sparkles,
-    style: 'border-[#d4e4d9] bg-[#F1F7F2] text-[#557963]',
+    style: 'text-[#557963]',
   },
   {
     title: 'VIP Gift Bag',
     detail: 'A take-home treat worth over $120.',
     icon: Gift,
-    style: 'border-[#efd6db] bg-[#FBF1F3] text-[#995d6a]',
+    style: 'text-[#995d6a]',
   },
 ];
 
 export default function StylingNights({ onOpenBooking }) {
   return (
-    <section id="events" className="relative isolate overflow-hidden bg-[#FAF8F5] py-20 sm:py-24">
+    <section id="events" className="relative isolate overflow-hidden bg-[#F4EFEA] py-20 sm:py-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-40 top-0 h-[28rem] w-[28rem] rounded-full bg-[#dfc18d]/20 blur-[120px]" />
         <div className="absolute -right-36 bottom-0 h-[30rem] w-[30rem] rounded-full bg-[#e7b6bf]/15 blur-[130px]" />
@@ -46,7 +46,7 @@ export default function StylingNights({ onOpenBooking }) {
               {highlights.map(({ title, detail, icon: Icon, style }) => (
                 <article
                   key={title}
-                  className={`group rounded-2xl border p-4 shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${style}`}
+                  className={`group rounded-2xl border border-amber-200/60 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${style}`}
                 >
                   <Icon aria-hidden="true" className="mb-4 h-5 w-5" strokeWidth={1.8} />
                   <h3 className="font-serif text-lg font-semibold text-[#302821]">{title}</h3>

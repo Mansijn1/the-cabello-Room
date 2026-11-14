@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { 
   Sparkles, 
   Droplets, 
-  Palette, 
   Coffee, 
-  Wind, 
-  Layers, 
-  ShieldCheck, 
   Wine, 
   X, 
   Clock, 
@@ -29,19 +25,15 @@ export default function Step1Mission({ onOpenBooking }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedExperience]);
 
-  // 8 Vibrant, Distinct Salon Experiences
   const experiences = [
     {
       id: "balayage-studio",
       title: "Balayage & Foiling Studio",
       shortDesc: "Micro-feathered foils creating seamless sunlit dimension and zero harsh lines.",
       fullDesc: "Our dedicated blonding and balayage stations are equipped with custom daylight-balanced lighting. Every foil is feathered with micro-precision to ensure flawless diffusion, natural lived-in regrowth, and long-lasting radiance.",
-      img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=85",
+      img: "/misson-studio.avif",
       badge: "Sunlit Artistry",
       badgeColor: "bg-[#f5e5c4] text-[#76551e] border-[#d6b56f]",
-      cardBg: "from-[#fff2d6] via-[#f9e3b8] to-[#f4d29a]",
-      cardBorder: "border-[#d7b778] hover:border-[#b88b38]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(170,119,42,0.22)]",
       duration: "180 - 210 Mins",
       price: "From $295",
       icon: Sparkles,
@@ -58,12 +50,9 @@ export default function Step1Mission({ onOpenBooking }) {
       title: "Japanese Head Spa Suite",
       shortDesc: "Penrith's signature warm waterfall halo cascade and botanical scalp scrubs.",
       fullDesc: "An immersive, dimly lit sensory retreat featuring an authentic circular water halo fountain. Clarifies stubborn scalp sebum, improves micro-circulation, and melts tension through extended cervical acupressure massage.",
-      img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=85",
+      img: "/services-japananieshairspa.avif",
       badge: "Sensory Halo",
       badgeColor: "bg-[#dcefe1] text-[#286344] border-[#8cb99b]",
-      cardBg: "from-[#e8f6e8] via-[#d2ecd9] to-[#bfe1ce]",
-      cardBorder: "border-[#9cc7a9] hover:border-[#4e9868]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(57,130,82,0.2)]",
       duration: "90 Mins",
       price: "From $195",
       icon: Droplets,
@@ -76,38 +65,13 @@ export default function Step1Mission({ onOpenBooking }) {
       ]
     },
     {
-      id: "color-bar",
-      title: "Bespoke Color Bar",
-      shortDesc: "Custom-blended pH-balanced glazes, rich mochas, and luminous tone contouring.",
-      fullDesc: "Where color science meets personalized artistry. We customize multi-tonal acidic glazes tailored specifically to your skin tone, bone structure, and lifestyle maintenance goals.",
-      img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=85",
-      badge: "Color Alchemy",
-      badgeColor: "bg-[#f8e1d3] text-[#874329] border-[#d59b79]",
-      cardBg: "from-[#ffe5d4] via-[#f8cbb1] to-[#f0b593]",
-      cardBorder: "border-[#dca286] hover:border-[#ba6841]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(183,94,55,0.2)]",
-      duration: "120 - 150 Mins",
-      price: "From $220",
-      icon: Palette,
-      iconColor: "text-orange-400",
-      perks: [
-        "Zero-ammonia acidic liquid glossing",
-        "Cheekbone & jawline color contouring",
-        "Deep tone longevity & mirror reflection",
-        "Color-lock seal treatment included"
-      ]
-    },
-    {
       id: "hospitality-lounge",
       title: "VIP Hospitality Suite",
       shortDesc: "Complimentary artisan barista coffee, chilled prosecco, and gourmet grazing.",
       fullDesc: "Your salon visit is a relaxing escape. Sink into comfortable seating while enjoying freshly pulled espresso, organic herbal infusions, artisan teas, or chilled sparkling wine alongside sweet grazing treats.",
-      img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1000&q=85",
+      img: "/mission-viphospiliaty.avif",
       badge: "Curated Bar",
       badgeColor: "bg-[#f5dfe6] text-[#88445b] border-[#d59bad]",
-      cardBg: "from-[#fde8ef] via-[#f4d0dc] to-[#eebdce]",
-      cardBorder: "border-[#dfa7b8] hover:border-[#c36a88]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(190,92,126,0.2)]",
       duration: "All Sessions",
       price: "Complimentary",
       icon: Coffee,
@@ -120,82 +84,13 @@ export default function Step1Mission({ onOpenBooking }) {
       ]
     },
     {
-      id: "blowdry-bar",
-      title: "The Glamour Blowdry Bar",
-      shortDesc: "Velvet round-brush volume, red carpet bouncy waves, and humidity shields.",
-      fullDesc: "Experience the ultimate blowout. Designed to add lightweight, bouncy volume and glass-like mirror shine that stays gorgeous for days, finished with tailored styling tutorials.",
-      img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=85",
-      badge: "Red Carpet Waves",
-      badgeColor: "bg-[#f1e4f5] text-[#754a84] border-[#c0a2ce]",
-      cardBg: "from-[#f6e9fa] via-[#e9d8f1] to-[#d8c2e5]",
-      cardBorder: "border-[#c9add4] hover:border-[#9a6bab]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(139,91,157,0.2)]",
-      duration: "45 - 60 Mins",
-      price: "From $85",
-      icon: Wind,
-      iconColor: "text-pink-400",
-      perks: [
-        "Aromatic clarifying hair bath",
-        "Architectural round-brush tension technique",
-        "Long-lasting bouncy curls or sleek glass finish",
-        "Sydney anti-humidity thermal shield"
-      ]
-    },
-    {
-      id: "extension-room",
-      title: "Russian Remy Extension Suite",
-      shortDesc: "Ultra-flat undetectable tape-ins and hand-tied wefts for density and length.",
-      fullDesc: "Private extension consultation and installation suite. We work exclusively with 100% cuticle-intact double-drawn Russian Remy hair, custom-color blended and razor-tapered for weightless movement.",
-      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85",
-      badge: "100% Remy Hair",
-      badgeColor: "bg-[#dcebf4] text-[#315d76] border-[#94b6ca]",
-      cardBg: "from-[#e4f2f8] via-[#cee5f0] to-[#b6d8e8]",
-      cardBorder: "border-[#99bfd2] hover:border-[#5086a1]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(72,134,164,0.2)]",
-      duration: "150 - 180 Mins",
-      price: "From $650",
-      icon: Layers,
-      iconColor: "text-purple-400",
-      perks: [
-        "Medical-grade ultra-thin tape bonds",
-        "100% virgin cuticle-aligned human hair",
-        "Custom razor perimeter blending cut",
-        "Includes take-home maintenance kit"
-      ]
-    },
-    {
-      id: "molecular-sanctuary",
-      title: "Molecular Repair Studio",
-      shortDesc: "Biomimetic K18 peptide repair and Olaplex disulfide bond reconstruction.",
-      fullDesc: "Reverse chemical, heat, and environmental damage at the molecular core. Reconnects broken polypeptide keratin chains to restore natural elasticity, bounce, and virgin-like softness.",
-      img: "https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?auto=format&fit=crop&w=1000&q=85",
-      badge: "K18 & Olaplex",
-      badgeColor: "bg-[#d9efed] text-[#286a65] border-[#88bfba]",
-      cardBg: "from-[#e0f5f1] via-[#c6e8e3] to-[#aadbd4]",
-      cardBorder: "border-[#91c8c0] hover:border-[#4d9a90]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(60,147,137,0.2)]",
-      duration: "30 - 45 Mins",
-      price: "From $65",
-      icon: ShieldCheck,
-      iconColor: "text-cyan-400",
-      perks: [
-        "Clinically proven K18 peptide infusion",
-        "Olaplex concentrated bond reconstruction",
-        "Immediate restoration of hair elasticity",
-        "Thermal fiber seal for silky smoothness"
-      ]
-    },
-    {
       id: "styling-masterclasses",
       title: "Styling Nights & Masterclasses",
       shortDesc: "After-hours hands-on curling coaching, grazing boards, and VIP gift bags.",
       fullDesc: "Join salon owner Celeste and our senior artists for fun after-hours masterclasses. Learn how to curl, wave, and volume-style your own hair with professional heat tools while enjoying sparkling wine.",
-      img: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1000&q=85",
+      img: "/misson -masterclass.avif",
       badge: "VIP Masterclasses",
       badgeColor: "bg-[#f8edc8] text-[#785d1b] border-[#cfb45e]",
-      cardBg: "from-[#fff4cb] via-[#f5e6a8] to-[#ecd77e]",
-      cardBorder: "border-[#d5bf6b] hover:border-[#b69a37]",
-      glowColor: "hover:shadow-[0_18px_38px_rgba(172,144,44,0.2)]",
       duration: "2 Hours (Evenings)",
       price: "$95 (Includes $120 Gift Bag)",
       icon: Wine,
@@ -224,16 +119,13 @@ export default function Step1Mission({ onOpenBooking }) {
             Be A Part Of <span className="italic font-light text-[#a75f42]">Our Mission</span>
           </h2>
           <p className="font-sans text-sm sm:text-base text-[#705c50] mt-4 font-light leading-relaxed">
-            Every corner of The Cabello Room is thoughtfully curated. Explore our 8 signature salon suites below—click any card to preview the full sensory experience.
+            Every corner of The Cabello Room is thoughtfully curated. Explore our 4 signature salon suites below—click any card to preview the full sensory experience.
           </p>
         </div>
 
-        {/* 8-Card Vibrant Grid with Alternating Rotation & Scale-0.95 Zoom-Out Hover */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 sm:gap-8 mb-16">
-          {experiences.map((item, index) => {
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-16">
+          {experiences.map((item) => {
             const IconComponent = item.icon;
-            // Alternating rotation: odd cards -1.5deg, even cards +1.5deg
-            const rotationClass = index % 2 === 0 ? 'sm:rotate-[-2deg]' : 'sm:rotate-[2deg]';
 
             return (
               <div 
@@ -248,15 +140,14 @@ export default function Step1Mission({ onOpenBooking }) {
                 role="button"
                 tabIndex={0}
                 aria-label={`Preview ${item.title}`}
-                className={`group relative rounded-3xl overflow-hidden border ${item.cardBorder} bg-gradient-to-br ${item.cardBg} p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 ease-in-out hover:scale-95 hover:rotate-0 hover:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8f5b38] ${rotationClass} ${item.glowColor} shadow-lg`}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-amber-200/70 bg-[#FAF6F0] p-5 shadow-[0_12px_30px_rgba(74,54,31,0.10)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8f5b38]"
               >
                 <div>
-                  {/* Top Colorful Image Container with Smooth Zoom Transition */}
-                  <div className="relative h-56 rounded-2xl overflow-hidden mb-5 bg-white/40 shadow-md">
+                  <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-2xl bg-[#eee8df] shadow-sm">
                     <img 
                       src={item.img} 
                       alt={item.title} 
-                      className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-95 filter saturate-110 contrast-105"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                     />
                     
                     {/* Dark gradient overlay */}
@@ -418,11 +309,7 @@ export default function Step1Mission({ onOpenBooking }) {
                     const suiteMap = {
                       'balayage-studio': 'lived-in-blonde',
                       'head-spa-suite': 'japanese-head-spa',
-                      'color-bar': 'custom-balayage',
                       'hospitality-lounge': 'consultation',
-                      'blowdry-bar': 'precision-cut',
-                      'extension-room': 'luxury-extensions',
-                      'molecular-sanctuary': 'lived-in-blonde',
                       'styling-masterclasses': 'consultation'
                     };
                     const serviceKey = suiteMap[selectedExperience.id] || 'lived-in-blonde';

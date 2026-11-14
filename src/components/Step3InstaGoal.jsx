@@ -1,5 +1,5 @@
-import React from 'react';
-import { ExternalLink, Heart, MessageCircle } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, ExternalLink, Heart, MessageCircle, Play } from 'lucide-react';
 import { InstagramIcon } from './SocialIcons';
 
 const goalPics = [
@@ -66,10 +66,40 @@ const goalPics = [
 ];
 
 export default function Step3InstaGoal({ onOpenBooking }) {
-  const renderPost = (pic) => (
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % goalPics.length);
+    }, 4500);
+
+    return () => window.clearInterval(intervalId);
+  }, [isPaused]);
+
+  const showPost = (index) => {
+    setActiveIndex((index + goalPics.length) % goalPics.length);
+  };
+
+  const renderPost = (pic, index) => {
+    const distance = Math.min(
+      (index - activeIndex + goalPics.length) % goalPics.length,
+      (activeIndex - index + goalPics.length) % goalPics.length
+    );
+    const scale = index === activeIndex ? 1.04 : 1 - distance * 0.08;
+
+    return (
     <article
       key={pic.id}
-      className={`group relative aspect-[4/5] w-[min(72vw,260px)] flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${pic.tint} shadow-[0_12px_35px_rgba(0,0,0,0.28)] transition-transform duration-300 hover:scale-105 focus-within:scale-105`}
+      aria-label={`${pic.title}, ${index + 1} of ${goalPics.length}`}
+      className="group absolute left-1/2 top-1/2 aspect-[4/5] w-[min(66vw,230px)] overflow-hidden rounded-2xl border border-[#D4AF37]/60 bg-[#17130F] shadow-[0_0_25px_rgba(212,175,55,0.18)] transition-[transform,border-color,box-shadow] duration-700 ease-in-out hover:border-[#F3E5AB] hover:shadow-[0_0_32px_rgba(212,175,55,0.3)] [backface-visibility:hidden]"
+      style={{
+        transform: `translate(-50%, -50%) rotateY(${index * 60}deg) translateZ(var(--carousel-radius)) scale(${scale})`,
+        zIndex: index === activeIndex ? 10 : 4 - distance,
+        backfaceVisibility: 'hidden',
+      }}
     >
       <img
         src={pic.img}
@@ -78,6 +108,14 @@ export default function Step3InstaGoal({ onOpenBooking }) {
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${pic.tint} opacity-45 transition-opacity duration-300 group-hover:opacity-80`} />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-full top-0 z-10 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-[#F3E5AB]/30 to-transparent transition-[left] duration-700 ease-out group-hover:left-[140%]"
+      />
+      <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/70 bg-[#0F0E0D]/75 px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#F3E5AB] shadow-[0_0_15px_rgba(212,175,55,0.18)] backdrop-blur-sm">
+        <Play aria-hidden="true" className="h-3 w-3 fill-current" />
+        Reel
+      </span>
 
       <div className="absolute inset-0 flex flex-col justify-between bg-[#100c13]/60 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
         <div className="flex items-center justify-between text-xs font-medium text-white">
@@ -97,21 +135,25 @@ export default function Step3InstaGoal({ onOpenBooking }) {
           <button
             type="button"
             onClick={() => onOpenBooking(pic.serviceId)}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#e7c77f] via-[#d7ad5c] to-[#c79542] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#20170d] shadow-[0_0_22px_rgba(197,160,89,0.3)] transition-all hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#e7c77f] via-[#d7ad5c] to-[#c79542] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#20170d] shadow-[0_0_22px_rgba(197,160,89,0.3)] transition-all hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3E5AB]"
           >
             Book This Look <span aria-hidden="true">→</span>
           </button>
         </div>
       </div>
     </article>
-  );
+    );
+  };
 
   return (
-    <section id="insta-goals" className="relative overflow-hidden bg-[#0F0E0D] py-24">
-      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-fuchsia-900/10 blur-[120px]" />
-      <div aria-hidden="true" className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-amber-700/10 blur-[120px]" />
+    <section
+      id="insta-goals"
+      className="relative isolate overflow-hidden bg-[url('/service-backgroundimage.avif')] bg-cover bg-center bg-fixed py-24"
+    >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 bg-[#0F0E0D]/80 backdrop-blur-sm" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_50%_20%,rgba(212,175,55,0.12),transparent_58%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-12 flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <h2 className="font-serif text-3xl font-light leading-tight text-[#FDFBF7] sm:text-4xl md:text-5xl">
@@ -122,16 +164,16 @@ export default function Step3InstaGoal({ onOpenBooking }) {
             </p>
           </div>
 
-          <div className="flex w-full flex-col gap-4 rounded-2xl border border-pink-400/30 bg-gradient-to-r from-fuchsia-950/40 via-purple-900/30 to-amber-900/20 p-4 shadow-[0_12px_40px_rgba(94,35,83,0.18)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between md:w-auto md:min-w-[460px]">
+          <div className="flex w-full flex-col gap-4 rounded-2xl border border-[#D4AF37]/35 bg-[#0F0E0D]/70 p-4 shadow-[0_12px_40px_rgba(212,175,55,0.12)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between md:w-auto md:min-w-[460px]">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-fuchsia-600 p-[2px] shadow-[0_0_22px_rgba(225,91,142,0.25)]">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#18121c] text-white">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#F3E5AB] via-[#D4AF37] to-[#9b733b] p-[2px] shadow-[0_0_22px_rgba(212,175,55,0.25)]">
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#181512] text-[#F3E5AB]">
                   <InstagramIcon className="h-5 w-5" />
                 </div>
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold tracking-wide text-white">@thecabelloroom</p>
-                <span className="mt-1 inline-flex rounded-full border border-pink-200/20 bg-pink-300/10 px-2.5 py-1 text-[10px] font-medium text-pink-100 shadow-[0_0_16px_rgba(236,72,153,0.2)]">
+                <span className="mt-1 inline-flex rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/10 px-2.5 py-1 text-[10px] font-medium text-[#F3E5AB] shadow-[0_0_16px_rgba(212,175,55,0.12)]">
                   20k+ followers
                 </span>
               </div>
@@ -148,17 +190,61 @@ export default function Step3InstaGoal({ onOpenBooking }) {
           </div>
         </div>
 
-        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-          <div
-            aria-label="Instagram inspiration posts"
-            className="flex w-max animate-insta-marquee motion-reduce:animate-none hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
-          >
-            <div className="flex flex-shrink-0 gap-5 pr-5">
+        <div
+          className="mx-auto max-w-5xl"
+          onPointerEnter={() => setIsPaused(true)}
+          onPointerLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
+          }}
+        >
+          <div className="relative mx-auto h-[400px] w-full overflow-hidden [perspective:1200px] sm:h-[450px]">
+            <div
+              aria-label="Instagram inspiration carousel"
+              aria-roledescription="carousel"
+              className="absolute inset-0 [transform-style:preserve-3d] [--carousel-radius:165px] transition-transform duration-700 ease-in-out sm:[--carousel-radius:210px] lg:[--carousel-radius:270px]"
+              style={{ transform: `rotateY(${-activeIndex * 60}deg)` }}
+            >
               {goalPics.map(renderPost)}
             </div>
-            <div aria-hidden="true" inert className="flex flex-shrink-0 gap-5 pr-5">
-              {goalPics.map((pic) => renderPost({ ...pic, id: `duplicate-${pic.id}` }))}
+          </div>
+
+          <div className="mt-5 flex items-center justify-center gap-5">
+            <button
+              type="button"
+              aria-label="Previous Instagram inspiration"
+              onClick={() => showPost(activeIndex - 1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37]/50 bg-[#0F0E0D]/60 text-[#F3E5AB] shadow-[0_0_16px_rgba(212,175,55,0.12)] transition-colors hover:border-[#F3E5AB] hover:bg-[#D4AF37]/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3E5AB]"
+            >
+              <ChevronLeft aria-hidden="true" className="h-5 w-5" />
+            </button>
+
+            <div className="flex items-center gap-2" role="group" aria-label="Choose an Instagram inspiration">
+              {goalPics.map((pic, index) => (
+                <button
+                  key={pic.id}
+                  type="button"
+                  aria-label={`Show ${pic.title}`}
+                  aria-pressed={activeIndex === index}
+                  onClick={() => showPost(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3E5AB] ${
+                    activeIndex === index
+                      ? 'w-7 bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.45)]'
+                      : 'w-2.5 bg-[#F3E5AB]/45 hover:bg-[#F3E5AB]/80'
+                  }`}
+                />
+              ))}
             </div>
+
+            <button
+              type="button"
+              aria-label="Next Instagram inspiration"
+              onClick={() => showPost(activeIndex + 1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37]/50 bg-[#0F0E0D]/60 text-[#F3E5AB] shadow-[0_0_16px_rgba(212,175,55,0.12)] transition-colors hover:border-[#F3E5AB] hover:bg-[#D4AF37]/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3E5AB]"
+            >
+              <ChevronRight aria-hidden="true" className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>

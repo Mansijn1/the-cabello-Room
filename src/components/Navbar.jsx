@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
 export default function Navbar({ onOpenBooking }) {
@@ -17,51 +18,51 @@ export default function Navbar({ onOpenBooking }) {
   return (
     <>
       {/* Clean Glassmorphic Header */}
-      <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled 
-          ? 'py-4 shadow-2xl bg-[#0F0E0D]/90 backdrop-blur-md border-b border-[#C5A059]/20' 
-          : 'py-6 bg-[#0F0E0D]/60 backdrop-blur-sm border-b border-[#C5A059]/10'
+      <header className={`fixed inset-x-0 top-0 z-40 h-16 border-b transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#141311]/85 shadow-lg backdrop-blur-md border-[#C5A059]/20'
+          : 'bg-[#141311]/75 backdrop-blur-md border-[#C5A059]/10'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-5 px-6 lg:px-12">
           
           {/* Official Brand Logo */}
-          <a href="#" className="focus:outline-none">
-            <Logo variant="horizontal" size="md" />
-          </a>
+          <Link to="/" className="shrink-0 focus:outline-none">
+            <Logo variant="horizontal" size="sm" />
+          </Link>
 
           {/* Simple Clean Navigation Links */}
-          <nav className="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.2em] text-[#D5CFC5] font-medium">
-            <a 
-              href="#" 
+          <nav className="hidden flex-1 items-center justify-center gap-8 text-xs font-medium uppercase tracking-[0.2em] text-[#D5CFC5] xl:gap-10 lg:flex">
+            <Link
+              to="/"
               className="hover:text-[#C5A059] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A059] hover:after:w-full after:transition-all after:duration-300"
             >
               Home
-            </a>
-            <a 
-              href="#specialties" 
+            </Link>
+            <Link
+              to="/about"
+              className="hover:text-[#C5A059] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A059] hover:after:w-full after:transition-all after:duration-300"
+            >
+              About
+            </Link>
+            <Link
+              to="/services"
               className="hover:text-[#C5A059] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A059] hover:after:w-full after:transition-all after:duration-300"
             >
               Services
-            </a>
-            <a 
-              href="#team" 
+            </Link>
+            <Link 
+              to="/team" 
               className="hover:text-[#C5A059] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A059] hover:after:w-full after:transition-all after:duration-300"
             >
               Stylists
-            </a>
-            <a 
-              href="#location" 
-              className="hover:text-[#C5A059] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A059] hover:after:w-full after:transition-all after:duration-300"
-            >
-              Contact
-            </a>
+            </Link>
           </nav>
 
           {/* Clean "Book Appointment" CTA Button */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden shrink-0 items-center lg:flex">
             <button 
               onClick={() => onOpenBooking()}
-              className="btn-gold px-7 py-2.5 rounded-full text-xs font-semibold uppercase tracking-[0.16em] flex items-center gap-2 shadow-lg shadow-[#C5A059]/20 hover:scale-105 active:scale-95 transition-all"
+              className="btn-gold flex items-center gap-2 rounded-full px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] shadow-md shadow-[#C5A059]/20 transition-all hover:scale-[1.03] active:scale-95"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book Appointment</span>
@@ -69,7 +70,7 @@ export default function Navbar({ onOpenBooking }) {
           </div>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center gap-3 lg:hidden">
             <button 
               onClick={() => onOpenBooking()}
               className="btn-gold px-4 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider"
@@ -113,10 +114,10 @@ export default function Navbar({ onOpenBooking }) {
           </div>
 
           <nav className="mt-8 flex flex-col gap-5 text-sm uppercase tracking-[0.2em]">
-            <a href="#" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Home</a>
-            <a href="#specialties" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Services</a>
-            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Stylists</a>
-            <a href="#location" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1">Contact</a>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Home</Link>
+            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">About</Link>
+            <Link to="/services" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Services</Link>
+            <Link to="/team" onClick={() => setMobileMenuOpen(false)} className="text-[#EDE8DF] hover:text-[#C5A059] py-1 border-b border-zinc-900">Stylists</Link>
           </nav>
         </div>
 
